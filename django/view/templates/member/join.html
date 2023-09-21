@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>회원가입</title>
+</head>
+<body>
+<form action="{% url 'member:join' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="member_email" placeholder="아이디">
+    <input type="password" name="member_password" placeholder="비밀번호">
+    <input type="text" name="member_name" placeholder="이름">
+    <input type="text" name="member_age" placeholder="나이">
+    <input type="date" name="member_birth" placeholder="생년월일">
+    <input type="submit" value="전송">
+</form>
+</body>
+</html>

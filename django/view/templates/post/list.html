@@ -1,0 +1,51 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <a href="{% url 'post:write' page=page %}">글 작성하기</a>
+    <title>게시글 목록</title>
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        li {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>{{ member_name }}님 환영합니다! <a href="{% url 'member:logout' %}">로그아웃</a></h2>
+    <table>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td><a  href="{% url 'post:detail' post_id=post.id page=page %}">{{ post.post_title }}</a></td>
+                <td>{{ post.member.member_name }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <ul>
+    {% if startPage > 1 %}
+        <a href="{% url 'post:list' page=startPage|add:-1 %}">이전</a>
+    {% endif %}
+    {% for i in "x"|rjust:5 %}
+        {% if forloop.counter0|add:startPage <= realEnd%}
+            <li>
+                <a href="{% url 'post:list' page=forloop.counter0|add:startPage %}">{{ forloop.counter0|add:startPage}}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+    {% if endPage < realEnd %}
+        <a href="{% url 'post:list' page=endPage|add:1 %}">다음</a>
+    {% endif %}
+    </ul>
+</body>
+</html>

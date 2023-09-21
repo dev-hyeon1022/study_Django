@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>게시글 작성</title>
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<a href="{% url 'post:list' page=page %}">목록 보기</a>
+<form action="{% url 'post:write' page=1 %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" value="{{ member_name }}" readonly>
+    <input type="text" name="post_title" placeholder="게시글 제목">
+    <textarea name="post_content" cols="30" rows="10" placeholder="게시글 내용"></textarea>
+    <div>
+        <input type="file" name="file1" multiple>
+{#        <input type="file" name="file2">#}
+    </div>
+    <input type="submit" value="완료">
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
